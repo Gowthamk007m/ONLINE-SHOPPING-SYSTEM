@@ -1,0 +1,11 @@
+Django
+django-mathfilters
+Pillow
+psycopg2
+python-decouple
+razorpay
+requests
+twilio
+gunicorn
+cloudinary
+django-cloudinary-storage
