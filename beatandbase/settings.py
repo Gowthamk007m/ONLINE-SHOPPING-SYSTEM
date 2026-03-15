@@ -135,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -169,5 +169,5 @@ EMAIL_USE_TLS = False
 TWILIO_ACCOUNT_SID = ''
 TWILIO_AUTH_TOKEN = ''
 
-RAZOR_KEY_ID = ''
-RAZOR_KEY_SECRET = ''
+RAZOR_KEY_ID = 'rzp_test_SRSzjrgCCTQGkC'
+RAZOR_KEY_SECRET = 'd7FedzIiT5aHCntmPR7BcRh5'

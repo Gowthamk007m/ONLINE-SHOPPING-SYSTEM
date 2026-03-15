@@ -58,7 +58,8 @@ def checkout(request):
             'gst':gst,
             'total':total,
             'form':form,
-            'payment_methods': Payment_methods.objects.all()
+            'payment_methods': Payment_methods.objects.all(),
+            'rzp_key_id': settings.RAZOR_KEY_ID,
             }
 
         return JsonResponse({'result':'successful'})
@@ -125,6 +126,7 @@ def cart_checkout(request):
         'coupon_cart':cart,
         'cart':cart_items,
         'coupons':Coupon.objects.all(),
+        'rzp_key_id': settings.RAZOR_KEY_ID,
     }
 
     client  = razorpay.Client(auth = (settings.RAZOR_KEY_ID,settings.RAZOR_KEY_SECRET))

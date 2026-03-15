@@ -695,7 +695,7 @@ $('#couponform').submit(function(event) {
 
     <script>
       var options = {
-          "key": "rzp_test_j7tLlhYiBfKPT3", // Enter the Key ID generated from the Dashboard
+          "key": "{{rzp_key_id}}", // Enter the Key ID generated from the Dashboard
           "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           "currency": "INR",
           "name": "beatandbase",
@@ -739,7 +739,13 @@ $('#couponform').submit(function(event) {
             return; 
           }
 
-          method = document.querySelector('input[name="payment"]:checked').getAttribute('id')
+          const selectedPayment = document.querySelector('input[name="payment"]:checked');
+          if (!selectedPayment) {
+            Swal.fire('Oops!', `Please select a payment method`, 'warning')
+            return;
+          }
+
+          const method = selectedPayment.getAttribute('id')
           if(method == 2){
             rzp1.open();
           }
