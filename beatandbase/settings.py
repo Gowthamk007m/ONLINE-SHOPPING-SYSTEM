@@ -22,11 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('secret_key')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('debug',cast = bool)
-
+SECRET_KEY = 'django-local-secret-key'
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -56,8 +53,7 @@ INSTALLED_APPS = [
     'checkout.templatetags',
     'admin_variant',
     'orders',
-    'cloudinary_storage',
-    'cloudinary',
+
 ]
 
 MIDDLEWARE = [
@@ -99,12 +95,8 @@ WSGI_APPLICATION = 'beatandbase.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('db_name'),
-        'USER': config('db_user'),
-        'PASSWORD': config('db_pass'),
-        'HOST': config('db_host'),
-        'PORT':config('db_port', cast=int),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -153,13 +145,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': config('CLOUDINARY_API_KEY') ,
-    'API_SECRET': config('CLOUDINARY_API_SECRET'),
-}
+
 
 AUTH_USER_MODEL = 'user_home.CustomUser'
 
@@ -172,15 +159,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL='user_login'
 LOGIN_REDIRECT_URL='home'
 
-EMAIL_BACKEND=config('EMAIL_BACKEND')
-EMAIL_HOST=config('EMAIL_HOST')
-EMAIL_PORT=config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER= config('mail')
-EMAIL_HOST_PASSWORD= config('mail_pass')
-EMAIL_USE_TLS=True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
 
-TWILIO_ACCOUNT_SID = config('sid')
-TWILIO_AUTH_TOKEN = config('token')
+TWILIO_ACCOUNT_SID = ''
+TWILIO_AUTH_TOKEN = ''
 
-RAZOR_KEY_ID = config('razor_id')
-RAZOR_KEY_SECRET = config('razor_secret')
+RAZOR_KEY_ID = ''
+RAZOR_KEY_SECRET = ''
