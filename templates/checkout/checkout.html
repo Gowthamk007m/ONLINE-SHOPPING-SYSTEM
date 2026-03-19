@@ -453,7 +453,7 @@ Checkout
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                window.location.href = `http://127.0.0.1:8989/orders/invoice/?id=${order_id}&addrs=${address_id}`
+                window.location.href = `http://127.0.0.1:8000/orders/invoice/?id=${order_id}&addrs=${address_id}`
               }  
 
             })
@@ -484,7 +484,7 @@ Checkout
 
     <script>
       var options = {
-          "key": "rzp_test_j7tLlhYiBfKPT3", // Enter the Key ID generated from the Dashboard
+          "key": "{{rzp_key_id}}", // Enter the Key ID generated from the Dashboard
           "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           "currency": "INR",
           "name": "beatandbase",
@@ -528,7 +528,13 @@ Checkout
           return; 
         }
 
-        method = document.querySelector('input[name="payment"]:checked').getAttribute('id')
+        const selectedPayment = document.querySelector('input[name="payment"]:checked');
+        if (!selectedPayment) {
+          Swal.fire('Oops!', `Please select a payment method`, 'warning')
+          return;
+        }
+
+        const method = selectedPayment.getAttribute('id')
         if(method == 2){
           rzp1.open();
         }
