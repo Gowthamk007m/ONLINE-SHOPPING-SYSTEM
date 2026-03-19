@@ -12,3 +12,14 @@ class ReviewRating(models.Model):
     
     def str(self):
         return self.review
+
+
+class Feedback(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField()
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product} - {self.buyer}'

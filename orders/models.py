@@ -39,6 +39,11 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=100,null=True,blank=True)
     payment_order_id = models.CharField(max_length=100,null=True,blank=True)
     payment_signature = models.CharField(max_length=100,null=True,blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[('pending', 'Pending'), ('completed', 'Completed'), ('cancelled', 'Cancelled')],
+        default='pending',
+    )
 
 
 
@@ -59,10 +64,33 @@ class Order_item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     variant = models.ForeignKey(Product_Variant, on_delete=models.SET_NULL,null=True)
     quantity = models.PositiveIntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='pending')
 
     def get_total(self):
         return self.variant.price * self.quantity
+
+    def save(self, *args, **kwargs):
+        if self.variant:
+            self.subtotal = self.variant.price * self.quantity
+        super().save(*args, **kwargs)
     
     def __str__(self) -> str:
         return str(self.order)
+
+
+class Payment(models.Model):
+    PAYMENT_STATUS_CHOICES = [
+        ('success', 'Success'),
+        ('failed', 'Failed'),
+        ('pending', 'Pending'),
+    ]
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payments')
+    buyer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='payments')
+    payment_date = models.DateTimeField(auto_now_add=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    payment_method = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return f'{self.order.order_id} - {self.payment_status}'
