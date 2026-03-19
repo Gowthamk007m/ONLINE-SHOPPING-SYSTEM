@@ -72,9 +72,8 @@ blocks used in base.html
             
             <div class="col-lg-6 col-12 text-left">
                     {% block search %}
-                    <form action="{% url 'user_search_product' %}" method='POST'>
-                        {% csrf_token %}
-                            <div class="input-group">
+                    <form action="{% url 'user_search_product' %}" method='GET'>
+                                                    <div class="input-group">
                                 <input name="search_text" required type="text" class="form-control" placeholder="Search for products">
                                 <div class="input-group-append" style="background-color: #D93636 !important;">
                                     <span class="input-group-text bg-transparent text-primary">

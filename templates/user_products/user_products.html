@@ -4,8 +4,7 @@
 {% load my_filters %}
 
 
-<form action="{% url 'user_search_product' %}" method='POST'>
-{% csrf_token %}
+<form action="{% url 'user_search_product' %}" method='GET'>
     <div class="input-group">
         <input name="search_text" type="text" class="form-control" placeholder="Search for products">
         <div class="input-group-append">

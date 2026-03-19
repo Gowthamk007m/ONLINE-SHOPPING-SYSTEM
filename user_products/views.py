@@ -61,13 +61,10 @@ def user_products(request):
 
 def search_product(request):
 
-    try:
-        search_text = request.POST['search_text']
-    except:
+    search_text = (request.GET.get('search_text') or request.POST.get('search_text') or '').strip()
+    if not search_text:
         return redirect(user_products)
-    
 
-    
     brand_ids = request.GET.getlist('brand')
     category_ids = request.GET.getlist('category')
 

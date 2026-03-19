@@ -393,13 +393,13 @@ Checkout
                             {% for pm in payment_methods  %}
                               {% if not total > 500000 %}
                                 <div class="custom-control custom-radio">
-                                    <input {% if pm.id == 2 %}checked{% endif %} type="radio" class="custom-control-input" name="payment" id="{{pm.id}}">
+                                    <input {% if pm.method == 'Razorpay' %}checked{% endif %} type="radio" class="custom-control-input" name="payment" id="{{pm.id}}" data-method="{{pm.method|lower}}">
                                     <label class="custom-control-label" for="{{pm.id}}">{{pm.method}}</label>
                                 </div>
                               {% else %}
-                                {% if not pm.id == 2 %}
+                                {% if pm.method != 'Razorpay' %}
                                 <div class="custom-control custom-radio">
-                                  <input {% if pm.id == 1 %}checked{% endif %} type="radio" class="custom-control-input" name="payment" id="{{pm.id}}">
+                                  <input {% if pm.method == 'COD' %}checked{% endif %} type="radio" class="custom-control-input" name="payment" id="{{pm.id}}" data-method="{{pm.method|lower}}">
                                   <label class="custom-control-label" for="{{pm.id}}">{{pm.method}}</label>
                                 </div>
                                 {% else %}
@@ -745,8 +745,8 @@ $('#couponform').submit(function(event) {
             return;
           }
 
-          const method = selectedPayment.getAttribute('id')
-          if(method == 2){
+          const selectedMethod = selectedPayment.dataset.method || ''
+          if (selectedMethod === 'razorpay') {
             rzp1.open();
           }
           else{
