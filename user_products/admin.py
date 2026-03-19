@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Feedback, ReviewRating
 
-# Register your models here.
+admin.site.register(ReviewRating)
+admin.site.register(Feedback)

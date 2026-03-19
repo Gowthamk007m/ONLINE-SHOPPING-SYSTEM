@@ -17,6 +17,13 @@ class Product(models.Model):
             
     identification = models.IntegerField(default=generate_product_id,null=True)
     product_name = models.CharField(unique=True,max_length=50)
+    seller = models.ForeignKey(
+        'user_home.CustomUser',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='seller_products',
+    )
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
     category = models.ForeignKey(Categories,on_delete=models.CASCADE)
     product_description = models.TextField(blank=True)
