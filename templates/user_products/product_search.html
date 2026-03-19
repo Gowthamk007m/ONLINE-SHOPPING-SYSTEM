@@ -1,8 +1,7 @@
 {% extends 'user_home/base.html' %}
 {% load static %}
 {% block search %}
-<form action="{% url 'user_search_product' %}" method='POST'>
-{% csrf_token %}
+<form action="{% url 'user_search_product' %}" method='GET'>
     <div class="input-group">
         <input name="search_text" required value="{{search_text}}" type="text" class="form-control" placeholder="Search for products">
         <div class="input-group-append" style="background-color: #D93636 !important;">
