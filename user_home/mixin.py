@@ -10,4 +10,4 @@ def send_otp_on_phone(phone_number,otp):
     message = client.messages.create(
         to=phone_number,
         from_="+13252406196",
-        body=f"Hi, Welcome to beatandbase your OTP is {otp}")
+        body=f"Hi, Welcome to BuyNow your OTP is {otp}")
