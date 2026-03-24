@@ -132,9 +132,9 @@ def user_register(request):
                     usr.save()
                     user_otp=random.randint(100000,999999)
                     UserOTP.objects.create(user=usr,otp=user_otp)
-                    mess=f'Hello\t{usr.username},\nYour OTP to verify your account for beatandbase is {user_otp}\nThanks!'
+                    mess=f'Hello\t{usr.username},\nYour OTP to verify your account for BuyNow is {user_otp}\nThanks!'
                     send_mail(
-                            "welcome to Beatandbase Verify your Email",
+                            "welcome to BuyNow Verify your Email",
                             mess,
                             settings.EMAIL_HOST_USER,
                             [usr.email],
@@ -191,9 +191,9 @@ def user_login(request):
             usr = CustomUser.objects.get(email=email)
             user_otp=random.randint(100000,999999)
             UserOTP.objects.create(user=usr,otp=user_otp)
-            mess=f'Hello\t{usr.username},\nYour OTP to verify your account for beatandbase is {user_otp}\nThanks!'
+            mess=f'Hello\t{usr.username},\nYour OTP to verify your account for BuyNow is {user_otp}\nThanks!'
             send_mail(
-                    "welcome to Beatandbase Verify your Email",
+                    "welcome to BuyNow Verify your Email",
                     mess,
                     settings.EMAIL_HOST_USER,
                     [usr.email],
@@ -289,7 +289,7 @@ def forgot_password(request):
                 UserOTP.objects.create(user=usr,otp=user_otp)
                 mess=f'Hello\t{usr.username},\nYour OTP to forgot password is {user_otp}\nThanks!'
                 send_mail(
-                        "welcome to Beatandbase Verify your Email",
+                        "welcome to BuyNow Verify your Email",
                         mess,
                         settings.EMAIL_HOST_USER,
                         [usr.email],
