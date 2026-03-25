@@ -24,7 +24,7 @@ def user_action(request,user_id):
     if user.is_blocked:
         user.is_blocked=False
         user.save()
-        mess=f'''Hello\t{user.username}, Your blocked beatandbase account has been unblocked
+        mess=f'''Hello\t{user.username}, Your blocked BuyNow account has been unblocked
         '''
         send_mail(
                 "Unblocked your account",
@@ -36,7 +36,7 @@ def user_action(request,user_id):
         return redirect(user_list)
     else:
         user.is_blocked=True
-        mess=f'''Hello\t{user.username}, For your kind information your beatandbase account is blocked
+        mess=f'''Hello\t{user.username}, For your kind information your BuyNow account is blocked
         '''
         send_mail(
                 "You account is blocked!",
